@@ -1,0 +1,39 @@
+Title: Maze
+Author: Zichun Lin & Zhenzhe Xu
+Course: CMPUT 275 B2
+
+
+Acknowledgment:
+Inspired by a post from rosettacode.org about
+generate a maze with dfs.
+http://rosettacode.org/wiki/Maze_generation#Python
+https://github.com/heyhuyen/Mazes
+Also, consultanting with my friend in high school.
+
+
+What is Maze:
+It is a Maze game written in python, with the implementation
+of Depth-First search and Tkinter (a python GUI library).
+
+This program contains two file, 'gamepanel.py' handling the GUI,
+and 'maze.py' generates the maze, etc.
+
+The maze is designed to be hard to solve:
+1. A lot of interesection
+2. Only the maze within 2 blocks is visulize to player
+
+However, we don't want to make you upset. The program will
+randomly generate a 'red block' aka 'coin path' to show your
+way out.
+
+You may config the row, column size, and the time that the
+'coin path' will last for before you start the game.
+
+
+How to play:
+1. download the file, unzip it
+2. run '$ python3 gameplanel.py' to start the game
+3. you may config the row and column size, and
+how long will the coin path(bonus) last for
+4. click 'New Game' then use your keyboard to play
+5. have fun:)
