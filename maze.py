@@ -12,12 +12,13 @@ class Maze(object):
         # make sure its odd number
         self.row_size = int(row / 2) * 2 + 1
         self.col_size = int(col / 2) * 2 + 1
-
+        # init maze map, a two dimension list with the row_size and col_size
         self.maze_map = [[0 for x in range(self.col_size)] for y in range(self.row_size)]
-
+        # create the maze map
         self.init_map()
         self.make_row()
         (self.start_p, self.end_p) = self.start_end_point()
+
 
     def display(self):
         """
@@ -26,6 +27,7 @@ class Maze(object):
         """
         for i in self.maze_map:
             print(i)
+
 
     def init_map(self):
         """
@@ -36,6 +38,7 @@ class Maze(object):
             for col in range(self.row_size):
                 if row % 2 == 0 or col % 2 == 0:
                     self.maze_map[col][row] = 1
+
 
     def make_row(self):
         """
@@ -54,6 +57,7 @@ class Maze(object):
             if np:
                 stack.append(cp)
                 stack.append(np)
+
 
     def get_next_point(self, p):
         """
@@ -75,6 +79,7 @@ class Maze(object):
             return (a, b) # return
         return None
 
+
     def get_arround(self, x, y, direction, juli=1):
         """
         get point, at (x,y) from 'direction'
@@ -93,6 +98,7 @@ class Maze(object):
         else:
             return (a, b)
 
+
     def adj(self, x, y):
         """
         get adj(not wall)
@@ -106,11 +112,13 @@ class Maze(object):
                 ls.append(np)
         return ls
 
+
     def random_point(self, row, col):
         """
         generate a point between 'row' and 'col', coulbe be either path or wall
         """
         return (random.randint(0, row - 1), random.randint(0, col - 1))
+
 
     def start_end_point(self):
         """
@@ -131,46 +139,6 @@ class Maze(object):
             if dx + dy > (self.col_size + self.row_size) / 2:
                 return (start_p, end_p)
 
-    # def solve_bf(self, start_point):
-    #     """
-    #     solve a path from certain point to exit
-    #     """
-    #
-    #     def get_next_access_point(p, visited):
-    #         x, y = p[0], p[1]
-    #         min_w = None
-    #         min_p = None
-    #         for d in range(0, 4):
-    #             (a, b) = self.get_arround(x, y, d, 1)
-    #
-    #             if not a or visited and (a, b) in visited:
-    #                 continue
-    #             if self.maze_map[a][b] == 1:
-    #                 continue
-    #             if min_w:
-    #                 if math.fabs(a - self.end_p[0]) + math.fabs(b - self.end_p[1]) < min_w:
-    #                     min_p = (a, b)
-    #                     min_w = math.fabs(a - self.end_p[0]) + math.fabs(b - self.end_p[1])
-    #             else:
-    #                 min_w = math.fabs(a - self.end_p[0]) + math.fabs(b - self.end_p[1])
-    #                 min_p = (a, b)
-    #         return min_p
-    #
-    #     visted = []
-    #     stack = [] # path
-    #     stack.append(start_point)
-    #     while len(stack) != 0:
-    #         cp = stack.pop()
-    #         if cp == self.end_p:
-    #             break
-    #         visted.append(cp)
-    #         np = get_next_access_point(cp, visted)
-    #         if np is None or np in visted:
-    #             continue
-    #         else:
-    #             stack.append(cp)
-    #             stack.append(np)
-    #     return stack # return the path
 
     def solve(self, start_point):
         '''Solve a path from certain point to exit
@@ -199,7 +167,8 @@ class Maze(object):
                 if cp:
                     self.maze_map[cp[0]][cp[1]] = 7
 
+
 if __name__ == "__main__":
     m = Maze(20, 20)
     # path = m.solve_bf(m.start_p)
-    m.display()
+    m.display() # print the map at terminal

@@ -3,11 +3,7 @@ import math
 import tkinter
 from tkinter import *
 from threading import Timer
-
-
 from maze import *
-
-
 
 
 class Application(Frame):
@@ -20,18 +16,19 @@ class Application(Frame):
         self.pack(expand=True, fill=BOTH)
         self.master = master
         self.maze = Maze(40, 40) # maze object
-        self.createWindow()
+        self.createWindow() # create gui window
         self.initCvs()
         self.initButton()
         self.show_icon = False
+
 
     def createWindow(self):
         """
         Set windows size, and central it
         :return:
         """
-        sw = self.master.winfo_screenwidth()
-        sh = self.master.winfo_screenheight()
+        sw = self.master.winfo_screenwidth() # screen width
+        sh = self.master.winfo_screenheight() # screen height
 
         self.h = sh - 100
         self.w = self.h
@@ -41,19 +38,20 @@ class Application(Frame):
         self.hero_y = self.maze.start_p[1]
         self.hero_id = 0
 
-        self.master.title("card game")
+        self.master.title("Maze") # title number
         # central
         x = (sw - self.w) / 2
         y = (sh - self.h) / 2
         # width * length + x-cord + y-cord
         self.master.geometry('%dx%d+%d+%d' % (self.w, self.h, x, y))
 
+
     def initButton(self):
         self.bottomFrame = Frame(self, borderwidth=2, relief="groove")
 
         self.bottomFrame.pack(side=BOTTOM, expand=FALSE, fill=BOTH)
 
-        # col size
+        # col size, label, allow user to customize
         Label(self.bottomFrame, text="col size:").pack(side=LEFT, pady=3, expand=True)
         # default value, unless user specific at GUI
         self.row_num = IntVar(value=40)
@@ -64,7 +62,7 @@ class Application(Frame):
         size.pack(side=LEFT, pady=3, expand=True)
 
 
-        # row size
+        # row size, label, allow user to customize
         Label(self.bottomFrame, text="row size:").pack(side=LEFT, pady=3, expand=True)
         # default value, unless user specific at GUI
         self.col_num = IntVar(value=40)
@@ -103,6 +101,7 @@ class Application(Frame):
         self.mainCvs.pack(expand=True, fill=BOTH)
         self.topFrame.pack(fill=BOTH, expand=True, side=TOP)
 
+
     def light_block(self, i, j):
         """
         determine what area shoule be blocked to player
@@ -116,7 +115,7 @@ class Application(Frame):
         # 对某点上下左右四个方向判断,如果四个方向有一个是英雄的位置 是 白
         # 否则,在对这个各个方向的 各个点进行相同判断
 
-        # 也就是,如果某点可以在2步之内走到英雄处,为白
+        # if some point can be reach within 2 blocks, visualable
         for a in range(4):
             (npx, npy) = self.maze.get_arround(i, j, a, 1)
             if npx:
@@ -132,13 +131,18 @@ class Application(Frame):
                         if nnpx and (nnpx, nnpy) == (self.hero_x, self.hero_y):
                             return True
 
+
+    # draw the whole map from maze_map
     def init_blocks(self):
         self.color_map = {}
+        self.maze.display()
         for i in range(self.maze.row_size):
             for j in range(self.maze.col_size):
                 type = self.maze.maze_map[i][j]
+                # '0' - represnt path or interesection
                 if type == 0:
                     self.color_map[(i, j)] = self.draw_block(i, j, "gray")
+                # '1' - represent wall
                 if type == 1:
                     self.color_map[(i, j)] = self.draw_block(i, j, "black")
         # drwa player
@@ -148,6 +152,7 @@ class Application(Frame):
         # draw bonue - coin path
         self.award_id = ''
         self.draw_award()
+
 
     def draw_hero(self):
         """
@@ -163,7 +168,9 @@ class Application(Frame):
                                                      (self.hero_x + (3 / 4)) * self.block_size,
                                                      (self.hero_y + (3 / 4)) * self.block_size,
                                                      fill="blue", outline="blue")
+
         # check every position, you may comment out this part
+        # you may this part, then the whole map is visuable
         for i in range(self.maze.row_size):
             for j in range(self.maze.col_size):
                 id = self.color_map.get((i, j))
@@ -184,6 +191,7 @@ class Application(Frame):
                     elif self.mainCvs.itemcget(id, "fill") != "black":
                         self.mainCvs.itemconfigure(id, fill="black", outline="black")
 
+
     def draw_coin(self, i, j, color):
         """
         at coordinate(i, j), draw coin(circle)
@@ -194,6 +202,7 @@ class Application(Frame):
                                         (j + (3 / 4)) * self.block_size,
                                         fill=color, outline=color)
 
+
     def draw_block(self, i, j, color):
         """
         at coordinate(i, j), draw block with 'color'
@@ -201,6 +210,7 @@ class Application(Frame):
         return self.mainCvs.create_rectangle((i) * self.block_size, (j) * self.block_size,
                                              (i + 1) * self.block_size, (j + 1) * self.block_size,
                                              fill=color, outline=color)
+
 
     def draw_award(self):
         """
@@ -218,6 +228,7 @@ class Application(Frame):
                 break
         self.award_id = self.draw_block(*self.award_p, "red") # draw red block
 
+
     def set_show_icon(self, bool):
         """
         implement timer, determine when to get rid of 'coin path'
@@ -230,27 +241,20 @@ class Application(Frame):
                         self.maze.maze_map[i][j] = 0
             self.draw_hero()
 
+
     def show_message(self, m):
         """
         popup message
-
-
         """
         import tkinter.messagebox
         # default messagebox
         tkinter.messagebox.showinfo(title="Note", message=m)
 
 
-
-
-
-
-
 class Handler(object):
     """
     event handler
     """
-
     def __init__(self, app):
         self.app = app
         self.maze = app.maze
@@ -260,7 +264,6 @@ class Handler(object):
         """
         handling
         click event
-
         """
         self.mainCvs.focus_force()
 
