@@ -117,17 +117,24 @@ class Application(Frame):
 
         # if some point can be reach within 2 blocks, visualable
         for a in range(4):
+            # get the point around
             (npx, npy) = self.maze.get_arround(i, j, a, 1)
             if npx:
+                # if it is '1' - wall
                 if self.maze.maze_map[npx][npy] == 1:
                     continue
+                # if the point around x, y in a direction
+                # within 1 block is hero, then this part is visulize to player
                 if (npx, npy) == (self.hero_x, self.hero_y):
                     return True
                 for b in range(4):
+                    # get the point around 'npx'
                     (nnpx, nnpy) = self.maze.get_arround(npx, npy, b, 1)
                     if nnpx:
+                        # if it is '1' - wall
                         if self.maze.maze_map[nnpx][nnpy] == 1:
                             continue
+                        # if the point aroud npx, npy in b direction is hero
                         if nnpx and (nnpx, nnpy) == (self.hero_x, self.hero_y):
                             return True
 

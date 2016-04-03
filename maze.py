@@ -82,19 +82,19 @@ class Maze(object):
         return None
 
 
-    def get_arround(self, x, y, direction, juli=1):
+    def get_arround(self, x, y, direction, distance=1):
         """
         get point, at (x,y) from 'direction'
         """
         a, b = 0, 0
         if direction == 0:
-            a, b = x, y - juli
+            a, b = x, y - distance
         elif direction == 1:
-            a, b = x + juli, y
+            a, b = x + distance, y
         elif direction == 2:
-            a, b = x, y + juli
+            a, b = x, y + distance
         elif direction == 3:
-            a, b = x - juli, y
+            a, b = x - distance, y
         if a >= self.row_size or a <= 0 or b >= self.col_size or b <= 0:  # 房间号在许可范围内
             return None, None
         else:
