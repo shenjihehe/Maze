@@ -47,6 +47,8 @@ class Application(Frame):
 
 
     def initButton(self):
+        '''Config all kings of buttom
+        '''
         self.bottomFrame = Frame(self, borderwidth=2, relief="groove")
 
         self.bottomFrame.pack(side=BOTTOM, expand=FALSE, fill=BOTH)
@@ -112,8 +114,6 @@ class Application(Frame):
         # hero is avaibale
         if (i, j) == (self.hero_x, self.hero_y):
             return True
-        # 对某点上下左右四个方向判断,如果四个方向有一个是英雄的位置 是 白
-        # 否则,在对这个各个方向的 各个点进行相同判断
 
         # if some point can be reach within 2 blocks, visualable
         for a in range(4):

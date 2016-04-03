@@ -4,8 +4,7 @@ Course: CMPUT 275 B2
 
 
 Acknowledgment:
-Inspired by a post from rosettacode.org about
-generate a maze with dfs.
+Inspired by a post from rosettacode.org about maze generation.
 http://rosettacode.org/wiki/Maze_generation#Python
 https://github.com/heyhuyen/Mazes
 https://wiki.python.org/moin/Intro%20to%20programming%20with%20Python%20and%20Tkinter
@@ -30,6 +29,18 @@ way out.
 You may config the row, column size, and the time that the
 'coin path' will last for before you start the game.
 
+maze.py
+1. create a two dimension array, '0' -> path, '1' -> wall, '7' -> exit
+
+make_rwo():
+Implememnt DFS to create a map. The entrance point is placed at
+stack in the first place. When the stack is not empty, take
+one point out and mark as visited. Then, we generate a random adj
+point which is within the map and haven't been visited yet. And the,
+we create a path between them.
+
+get_next_point():
+get a random point near the argu - 'p'(point p)
 
 How to play:
 1. download the file, unzip it

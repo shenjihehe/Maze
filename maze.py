@@ -45,14 +45,16 @@ class Maze(object):
         implement dfs to create the maze
         """
         stack = []
-        self.visted = []
-        rp = self.random_point(self.col_size, self.row_size)
+        self.visted = [] # visited point
+        rp = self.random_point(self.col_size, self.row_size) # random point
         stack.append(((1,1)))
+         # when stack is not empty
         while stack:
             cp = stack.pop()
             # create more interesection, make the game harder
             if random.random() < 0.8:
                 self.visted.append(cp)
+            # create path, new point
             np = self.get_next_point(cp)
             if np:
                 stack.append(cp)
