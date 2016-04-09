@@ -10,7 +10,6 @@ class Application(Frame):
     """
     GUI, implement fcuntion from maze.py to generate maze
     """
-
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.pack(expand=True, fill=BOTH)
@@ -25,7 +24,6 @@ class Application(Frame):
     def createWindow(self):
         """
         Set windows size, and central it
-        :return:
         """
         sw = self.master.winfo_screenwidth() # screen width
         sh = self.master.winfo_screenheight() # screen height
@@ -107,11 +105,13 @@ class Application(Frame):
     def light_block(self, i, j):
         """
         determine what area shoule be blocked to player
+        three cases:
         """
         # only within two blocks is avaiable to player
         if math.fabs(self.hero_y - j) > 2 or math.fabs(self.hero_x - i) > 2:
             return False
-        # hero is avaibale
+
+        # if
         if (i, j) == (self.hero_x, self.hero_y):
             return True
 
@@ -224,7 +224,6 @@ class Application(Frame):
         draw a red block as bonus
         randomly generate one
         only one upon a time
-        :return:
         """
         if self.award_id:
             self.mainCvs.delete(self.award_id)
@@ -288,7 +287,7 @@ class Handler(object):
             self.app.col_num.__init__()
         self.app.hero_id = 0
         self.maze.__init__(self.app.row_num.get(), self.app.col_num.get())
-        self.app.hero_x = self.maze.start_p[0]
+        self.app.hero_x = self.maze.start_p[0] # assign start coord to player
         self.app.hero_y = self.maze.start_p[1]
         self.app.init_blocks() # start drawing block
 

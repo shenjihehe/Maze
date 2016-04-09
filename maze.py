@@ -95,7 +95,7 @@ class Maze(object):
             a, b = x, y + distance
         elif direction == 3:
             a, b = x - distance, y
-        if a >= self.row_size or a <= 0 or b >= self.col_size or b <= 0:  # 房间号在许可范围内
+        if a >= self.row_size or a <= 0 or b >= self.col_size or b <= 0:  # with in the row and col size
             return None, None
         else:
             return (a, b)
@@ -125,7 +125,6 @@ class Maze(object):
     def start_end_point(self):
         """
         create entrance and exit
-        :return:
         """
         while True:
             while True:
@@ -170,7 +169,8 @@ class Maze(object):
                     self.maze_map[cp[0]][cp[1]] = 7
 
 
+# for testing only!!
 if __name__ == "__main__":
     m = Maze(20, 20)
     # path = m.solve_bf(m.start_p)
-    m.display() # print the map at terminal
+    # m.display() # print the map at terminal
