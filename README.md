@@ -21,3 +21,4 @@ You goal is to find your way out to the Green point. However, if you get stuck, 
 ## Credits
 Inspired by a post from rosettacode.org about maze generation.
 http://rosettacode.org/wiki/Maze_generation#Python
+Zhenzhe Xu
